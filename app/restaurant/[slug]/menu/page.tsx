@@ -1,20 +1,12 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function page() {
     return (
     <main className= "bg-white min-h-screen w-screen">
-        <main className='m-auto max-w-screen-2xl'>
-            {/* Navbar */}
-            <div className='mb-4 bg-gray-200 pt-1 h-8 '>
-            <ul className='flex justify-end items-end gap-5 mr-10 text-gray-500 text-[12px]'>
-                <li> <a href=''> For Business </a></li>
-                <li> <a href=''> Mobile </a></li>
-                <li> <a href=''> Get help </a></li>
-                <li> <a href=''> FAQs </a></li>
-            </ul>
-            </div>
+        <main className='m-auto max-w-screen-2xl pt-8'>
             <nav className='bg-white p-2 flex justify-between mx-10'>
-            <a href='' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </a>
+                <Link href='/' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </Link>
             <div>
                 <div className='flex gap-2 mr-5 mb-2 text-sm'>
                 <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>

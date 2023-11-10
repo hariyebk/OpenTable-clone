@@ -1,20 +1,12 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function page() {
     return (
     <main className= "bg-white min-h-screen w-screen">
-        <main className='m-auto max-w-screen-2xl'>
-            {/* Navbar */}
-            <div className='mb-4 bg-gray-200 pt-1 h-8 '>
-            <ul className='flex justify-end items-end gap-5 mr-10 text-gray-500 text-[12px]'>
-                <li> <a href=''> For Business </a></li>
-                <li> <a href=''> Mobile </a></li>
-                <li> <a href=''> Get help </a></li>
-                <li> <a href=''> FAQs </a></li>
-            </ul>
-            </div>
+        <main className='m-auto max-w-screen-2xl pt-8'>
             <nav className='bg-white p-2 flex justify-between mx-10'>
-            <a href='' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </a>
+            <Link href='/' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </Link>
             <div>
                 <div className='flex gap-2 mr-5 mb-2 text-sm'>
                 <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>
@@ -36,8 +28,8 @@ export default function page() {
             <div className='bg-white w-[70%] rounded p-3 shadow'>
                 {/* RESTAURANT NAV BAR */}
                 <nav className='flex border-b pb-3 ml-4 font-medium'>
-                <a href='' className='mr-7'> overview </a>
-                <a href='' className='mr-7'> Menu </a>
+                    <Link href='/restaurant/baby' className='mr-7'> overview </Link>
+                    <Link href='/restaurant/baby/menu' className='mr-7'> Menu </Link>
                 </nav>
                 {/* TITLE */}
                 <div className='mt-8 pb-6 text-gray-600'>
@@ -92,7 +84,7 @@ export default function page() {
                         </div>
                         {/* REVIEW */}
                         <div className='mt-5'>
-                        <p className='text-sm font-normal text-justify'> This is the first time I experience this in this establishment. From the moment we arrived we weee told our table had been reserved for another party in 2 hours. It was plenty of time however through the whole meal we felt rushed.  Interrupted frequently. And as soon as we said we didn’t want dessert our bill and payment came immediately. We were not even finished our drinks. Didn’t make the night very pleasant. </p>
+                        <p className='text-sm font-normal text-justify'> This is the first time I experience this in this establishment. From the moment we arrived we were told our table had been reserved for another party in 2 hours. It was plenty of time however through the whole meal we felt rushed.  Interrupted frequently. And as soon as we said we didn’t want dessert our bill and payment came immediately. We were not even finished our drinks. Didn’t make the night very pleasant. </p>
                         </div>
                     </div>
                     </div>

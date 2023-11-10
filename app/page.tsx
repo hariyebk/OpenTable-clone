@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from './page.module.css'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -8,17 +9,8 @@ export default function Home() {
 return (
     <main className= "bg-white min-h-screen w-screen">
     <main className='m-auto max-w-screen-2xl'>
-        {/* Navbar */}
-        <div className='mb-4 bg-gray-200 pt-1 h-8 '>
-        <ul className='flex justify-end items-end gap-5 mr-10 text-gray-500 text-[12px]'>
-            <li> <a href=''> For Business </a></li>
-            <li> <a href=''> Mobile </a></li>
-            <li> <a href=''> Get help </a></li>
-            <li> <a href=''> FAQs </a></li>
-        </ul>
-        </div>
-        <nav className='bg-white p-2 flex justify-between mx-10'>
-        <a href='' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </a>
+        <nav className='bg-white p-2 flex justify-between mx-10 pt-8'>
+        <Link href='/' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </Link>
         <div>
             <div className='flex gap-2 mr-5 mb-2 text-sm'>
             <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>
@@ -57,30 +49,31 @@ return (
         </div>
         {/* HEADER */}
         {/* CARD */}
-        <div className='py-3 px-36 mt-10 flex flex-wrap'>
-        <div className='w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer'>
-            <img src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701343.webp' className='w-full h-40' />
-            <div className='p-3 text-gray-700'>
-            {/* DISH */}
-            <h3 className='font-bold text-xl mb-2'> Milestone's Grill </h3>
-            {/* REVIEW */}
-            <div className='flex items-start text-sm '>
-                <div className='flex mb-2'> **** </div>
-                <p className='ml-2'> 77 Reviews </p>
+        <Link href="/restaurant/baby">
+            <div className='py-3 px-36 mt-10 flex flex-wrap'>
+                <div className='w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer'>
+                    <img src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701343.webp' className='w-full h-40' />
+                    <div className='p-3 text-gray-700'>
+                    {/* DISH */}
+                        <h3 className='font-bold text-xl mb-2'> Milestone's Grill </h3>
+                        {/* REVIEW */}
+                        <div className='flex items-start text-sm '>
+                            <div className='flex mb-2'> **** </div>
+                            <p className='ml-2'> 77 Reviews </p>
+                        </div>
+                        {/* PRICE */}
+                        <div className='flex items-start font-normal capitalize text-sm'>
+                            <p className='mr-3'> Mexican </p>
+                            <p className='mr-3'> $$$$$ </p>
+                            <p> Toronto </p>
+                        </div>
+                        <div className=''>
+                            <p className='mt-3 text-sm font-semibold'> Booked 4 times Today </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {/* PRICE */}
-            <div className='flex items-start font-normal capitalize text-sm'>
-                <p className='mr-3'> Mexican </p>
-                <p className='mr-3'> $$$$$ </p>
-                <p> Toronto </p>
-            </div>
-            <div className=''>
-                <p className='mt-3 text-sm font-semibold'> Booked 4 times Today </p>
-            </div>
-            </div>
-        </div>
-
-        </div>
+        </Link>
     </main>
 </main>
 )
