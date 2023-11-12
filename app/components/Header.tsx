@@ -1,11 +1,5 @@
-"use client"
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-
+import SearchBar from './SearchBar'
 export default function Header() {
-    const router = useRouter()
-    const [location, setLocation] = useState("")
-    // programatic navigation only works in cient components not server components.
     return (
         <>
         <div className='h-72 bg-gradient-to-r from-[#0f1f47] to-[#5f6984]'>
@@ -25,15 +19,7 @@ export default function Header() {
                     <option value={3}> 3 people </option>
                 </select>
                 </div>
-                {/* SEARCH BAR */}
-                <div>
-                <input type='search' className='bg-white rounded md:text-sm sm:text-xs mr-3 md:w-[300px] sm:w-60 py-3.5 px-3 font-semibold text-black' placeholder='Location, Restaurant and Cusine' value={location} onChange={(e) => {
-                    setLocation(e.target.value)
-                    if(location === "banana") return 
-                    router.push("/search")
-                }} />
-                    <button className='bg-red-600 md:p-3 sm:p-2 rounded'> Let's Go </button>
-                </div>
+                <SearchBar />
             </div>
         </div>
         </div>

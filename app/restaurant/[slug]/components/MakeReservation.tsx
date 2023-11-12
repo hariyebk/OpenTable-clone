@@ -1,3 +1,4 @@
+'use client'
 export default function MakeReservation() {
     return (
         <div className='w-[25%] relative'>

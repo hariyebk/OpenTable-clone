@@ -1,5 +1,5 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
 
 export default function NavBar() {
     return (
@@ -7,8 +7,8 @@ export default function NavBar() {
         <Link href='/' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </Link>
         <div>
             <div className='flex gap-2 mr-5 mb-2 text-sm'>
-            <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>
-            <button className='text-gray-500 p-2 rounded'> Sign in </button>
+                <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>
+                <button className='text-gray-500 p-2 rounded'> Sign in </button>
             </div>
         </div>
         </nav>
