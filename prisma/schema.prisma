@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// create a table and columns using object relational mapper
+model Restaurant {
+  id  Int @id @default(autoincrement())
+  name String
+  main_image String
+  description String
+  images String[]
+  open_time String
+  close_time String
+  slug String @unique
+  dishes Dish[]
+  location_id Int
+  // many restaurants can belong to one location, and a restaurant can only have one location
+  location Location @relation(fields: [location_id], references: [id])
+  cusine_id Int
+  // many restaurant can belong to one cusine i.e mexican, italian ...., any a restaurant can have only one cusine
+  cusine Cusine @relation(fields: [cusine_id], references: [id])
+  price Price
+  created_at DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+model Dish {
+  id Int @id @default(autoincrement())
+  name String
+  price String
+  description String
+  restaurant_id Int
+  // many dishes can belong to a restaurant , and a restaurant can have many dishes
+  restaurant Restaurant @relation(fields: [restaurant_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+model Location {
+  id Int @id @default(autoincrement())
+  name String
+  restaurant Restaurant[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+model Cusine {
+  id Int @id @default(autoincrement())
+  name String
+  restaurant Restaurant[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+enum Price {
+  CHEAP
+  REGULAR
+  EXPENSIVE
+}

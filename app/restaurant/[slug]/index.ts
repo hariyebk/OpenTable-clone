@@ -1,5 +1,5 @@
 import NavBar from '../../components/NavBar'
-import Header from './components/Haeder'
+import Header from './components/Header'
 import RestaurantNavBar from './components/RestaurantNavBar'
 import Title from './components/Title'
 import Rating from './components/Rating'

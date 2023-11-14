@@ -1,9 +1,8 @@
-import {NavBar, Header, Rating, RestaurantNavBar, Reviews, Title, Description, Images, CustomerReveiws, MakeReservation} from "./"
+import {Rating, RestaurantNavBar, Reviews, Title, Description, Images, CustomerReveiws, MakeReservation, Header} from "./"
+import RestaurantLayout from "./RestaurantLayout"
 export default function page() {
     return (
-        <>
-            <Header />
-            <div className='flex m-auto w-[75%] justify-between items-start -mt-12 text-gray-700'>
+        <RestaurantLayout>
             <div className='bg-white w-[70%] rounded p-3 shadow'>
                 <RestaurantNavBar />
                 <Title />
@@ -16,7 +15,6 @@ export default function page() {
                 <CustomerReveiws />
             </div>
             <MakeReservation />
-            </div>
-        </>
+        </RestaurantLayout>
     )
 }

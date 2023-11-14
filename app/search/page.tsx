@@ -1,4 +1,4 @@
-import {NavBar, Header, SideBar, RestaurantCard} from "./"
+import {Header, SideBar, RestaurantCard} from "./"
 export default function page() {
     return (
         <>
