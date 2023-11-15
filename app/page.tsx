@@ -12,7 +12,8 @@ export interface RestaurantProps {
     price: string,
     slug: string
 }
-const fetchRestaurants = async (): Promise<RestaurantProps[]> => {
+const fetchRestaurants = async () => {
+    try{
     const restaurants = await prisma.restaurant.findMany({
         select: {
             id: true,
@@ -24,7 +25,12 @@ const fetchRestaurants = async (): Promise<RestaurantProps[]> => {
             slug: true
         }
     })
+    if(!restaurants) throw Error
     return restaurants
+    }
+    catch(error){
+        console.log(error)
+    }
 }
 
 export default async function Home() {
@@ -33,7 +39,7 @@ export default async function Home() {
         <main>
             <Header />
             <div className='flex flex-wrap justify-center items-center'>
-            {restaurants.map((res: RestaurantProps): React.ReactNode => {
+            {restaurants?.map((res: RestaurantProps): React.ReactNode => {
                 return (
                     <RestaurantCard restaurant={res}/>
                 )

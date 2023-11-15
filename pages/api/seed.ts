@@ -918,9 +918,8 @@ export default async function handler(
       },
       {
         name: "Orata ai Porri",
-        description: "$32.00",
-        price:
-          "Pan seared sea bream filet with sautéed leeks, served over a wild rice medley and greens",
+        description:  "Pan seared sea bream filet with sautéed leeks, served over a wild rice medley and greens",
+        price: "$32.00",
         restaurant_id: laBartolaId,
       },
       {

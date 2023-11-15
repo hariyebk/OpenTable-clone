@@ -1,7 +1,7 @@
 'use client'
 export default function MakeReservation() {
     return (
-        <div className='w-[25%] relative'>
+        <div className='w-[25%] sticky'>
             <div className="bg-white w-full rounded p-3 shadow">
                 {/* TITLE */}
                 <div className="text-center border-b pb-2 font-bold">

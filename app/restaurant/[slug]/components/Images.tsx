@@ -1,13 +1,13 @@
-export default function Images() {
+export default function Images({images}: {images: string[]}) {
     return (
         <div>
-            <h1 className='font-bold text-2xl pb-5 border-b mt-10 mb-6 ml-4'> 5 Photos </h1>
+            <h1 className='font-bold text-2xl pb-5 border-b mt-10 mb-6 ml-4'> {images.length} {images.length > 1 ? "photos" : "photo"} </h1>
             <div className='flex flex-wrap'>
-                <img className = 'w-56 h-44 mr-1 mb-1' src='https://resizer.otstatic.com/v2/photos/xlarge/3/41701347.webp' alt=''/>
-                <img className = 'w-56 h-44 mr-1 mb-1' src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701344.webp' alt=''/>
-                <img className = 'w-56 h-44 mr-1 mb-1' src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701349.webp' alt=''/>
-                <img className = 'w-56 h-44 mr-1 mb-1' src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701348.webp' alt=''/>
-                <img className = 'w-56 h-44 mr-1 mb-1' src='https://resizer.otstatic.com/v2/photos/xlarge/2/41701350.webp' alt=''/>
+                {images.map((image: string): React.ReactNode => {
+                    return (
+                        <img className = 'w-56 h-44 mr-1 mb-1' src={image} alt='restaurant-image' key={image}/>
+                    )
+                })}
             </div>
         </div>
     )

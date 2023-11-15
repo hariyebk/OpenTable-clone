@@ -7,12 +7,12 @@ export default function SearchBar() {
     const [location, setLocation] = useState('')
     return (
         <div>
-            <input type='search' className='bg-white rounded md:text-sm sm:text-xs mr-3 md:w-[300px] sm:w-60 py-3.5 px-3 font-semibold text-black' placeholder='Location, Restaurant and Cusine' value={location} onChange={(e) => {
+            <input type='search' className='bg-white rounded max-sm:w-[300px] max-sm:px-4 w-[360px] px-3 py-4 text-left mr-4 focus:outline-none font-semibold text-black' placeholder='Location, Restaurant and Cusine' value={location} onChange={(e) => {
                 setLocation(e.target.value)
                 if(location === "banana") return 
                 router.push("/search")
             }} />
-            <button className='bg-red-600 md:p-3 sm:p-2 rounded'> Let's Go </button>
+            <button className='bg-red-600 rounded-[50px] max-sm:px-7 max-sm:py-2 px-10 py-3'> Let's Go </button>
         </div>
     )
 }
