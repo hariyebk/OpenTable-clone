@@ -1,10 +1,7 @@
-export enum QUERY_KEY {
-    city = "city",
-    cusine = "cuisine"
-}
-export enum CATAGORIES {
-    Regions = "Regions",
-    Cuisines = "Cuisines"
+export enum RESTAURANT_QUERY_OPTIONS {
+    location = "city",
+    cuisine = "cuisine",
+    price = "price"
 }
 export enum PRICES {
     cheap = "cheap",

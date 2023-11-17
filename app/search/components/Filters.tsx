@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
-import { CATAGORIES, QUERY_KEY } from './Variables'
+import { RESTAURANT_QUERY_OPTIONS } from './Variables'
 import { Price } from '@prisma/client'
 
 export default function Filters({label, links, searchParams}: {label: string, links: {name: string}[], searchParams: {searchParams: {city?: string, cuisine?: string, price?: Price}}}) {
-    const queryKey = label === CATAGORIES.Regions ? QUERY_KEY.city : QUERY_KEY.cusine
+    const queryKey = label === RESTAURANT_QUERY_OPTIONS.location ? RESTAURANT_QUERY_OPTIONS.location : RESTAURANT_QUERY_OPTIONS.cuisine
     return (
         <div className='border-b pb-4'>
             <h1 className='mb-4 font-bold text-2xl pt-2'> {label} </h1>

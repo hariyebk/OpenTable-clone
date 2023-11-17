@@ -2,7 +2,8 @@ import React from "react"
 import {Header, SideBar, RestaurantCard} from "./"
 import {PrismaClient, Cusine, Location, Price} from "@prisma/client"
 import Filters from "./components/Filters"
-import { CATAGORIES } from "./components/Variables"
+import { RESTAURANT_QUERY_OPTIONS } from "./components/Variables"
+import PriceCatagory from "./components/PriceCatagory"
 const prisma = new PrismaClient()
 export interface searchedRestaurant {
     name: string,
@@ -13,8 +14,16 @@ export interface searchedRestaurant {
     slug: string,
     location: Location
 }
+export interface QueryParms {
+    searchParams: {
+        city?: string, 
+        cuisine?: string, 
+        price?: Price
+    }
+}
 
-const fetchSearchedRestaurant = async (queryKey: string) => {
+const fetchSearchedRestaurant = async ({searchParams}: QueryParms) => {
+    const where: any = {}
     const select = {
         name: true,
         main_image: true,
@@ -26,19 +35,29 @@ const fetchSearchedRestaurant = async (queryKey: string) => {
     }
     try{
         // If there is no query provided return 10 restuarants
-        if(!queryKey) return prisma.restaurant.findMany({select, take: 10})
-        const restaurants = await prisma.restaurant.findMany({
-            where: {
-                location: {
-                    name: {
-                        equals: queryKey
-                    }
+        if(!searchParams.city && !searchParams.cuisine && !searchParams.price) return prisma.restaurant.findMany({select, take: 10})
+        if(searchParams.city){
+            where.location = {
+                name: {
+                    equals: searchParams.city.toLowerCase()
                 }
-            },
-            select
-        })
+            }
+        }
+        if(searchParams.cuisine){
+            where.cusine = {
+                name: {
+                    equals: searchParams.cuisine.toLowerCase()
+                }
+            }
+        }
+        if(searchParams.price){
+            where.price = {
+                equals: searchParams.price.toUpperCase()
+            }
+        }
+        const restaurants = await prisma.restaurant.findMany({where, select})
         if(!restaurants.length) throw Error
-        return  restaurants
+        return restaurants    
     }
     catch(error){
         console.log(error)
@@ -68,9 +87,8 @@ const fetchCuisines = async () => {
         console.log(error)
     }
 }
-export default async function page({searchParams}: {searchParams: {city?: string, cuisine?: string, price?: Price}}){
-    const queryKey =  searchParams.city?.toLowerCase()
-    const restaurants = await fetchSearchedRestaurant(queryKey!)
+export default async function page({searchParams}: QueryParms){
+    const restaurants = await fetchSearchedRestaurant({searchParams})
     const locations = await fetchLocations()
     const cuisines = await fetchCuisines()
     return (
@@ -78,12 +96,15 @@ export default async function page({searchParams}: {searchParams: {city?: string
             <Header />
             <div className='flex py-4 m-auto w-2/3 justify-between items-start text-black'>
                 <SideBar>
-                    <nav>   
-                        <Filters label={CATAGORIES.Regions} links={locations!} searchParams={{searchParams}} />
-                    </nav>
-                    <nav>
-                        <Filters label={CATAGORIES.Cuisines} links={cuisines!} searchParams={{searchParams}}/>
-                    </nav>
+                    <>
+                        <nav>   
+                            <Filters label={RESTAURANT_QUERY_OPTIONS.location} links={locations!} searchParams={{searchParams}} />
+                        </nav>
+                        <nav>
+                            <Filters label={RESTAURANT_QUERY_OPTIONS.cuisine} links={cuisines!} searchParams={{searchParams}}/>
+                        </nav>
+                        <PriceCatagory searchParams={searchParams} />
+                    </>
                 </SideBar>
                 <div className='w-5/6 mt-5'>
                     {!restaurants ? (
