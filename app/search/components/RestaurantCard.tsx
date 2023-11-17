@@ -1,28 +1,29 @@
 import Link from 'next/link'
 import React from 'react'
-
-export default function RestaurantCard() {
+import { searchedRestaurant } from '../page'
+import Price from '../../components/Price'
+export default function RestaurantCard({restaurant}: {restaurant: searchedRestaurant}) {
     return (
-        <div className='border-b flex pb-5'>
-            <img src='https://resizer.otstatic.com/v2/photos/xlarge/2/52759093.webp' alt='doya-miami' className='w-44 rounded' />
+        <div className='border-b flex pb-5 space-x-3 ml-8 mb-5'>
+            <img src={restaurant.main_image} alt='searched-restaurant-image' className='w-64 h-auto rounded object-fill' />
             <div className='pl-5'>
-            <h2 className='text-3xl'> Fabel Miami </h2>
-            <div className='flex items-start mt-3'>
-                <div className='flex mb-2 text-black'>
-                    *****
+                <h2 className='text-2xl mt-2 font-bold'> {restaurant.name} </h2>
+                <div className='flex flex-col gap-2 items-start my-3'>
+                    <div className='flex text-black'>
+                        *****
+                    </div>
+                    <p className='ml-2 text-sm text-justify'> {restaurant.description} </p>
                 </div>
-                <p className='ml-2 text-sm'> Awesome </p>
-            </div>
-            <div className='mb-9'>
-                <div className='font-light flex text-reg text-black'>
-                <p className='mr-4'> $$$$ </p>
-                <p className='mr-4'> Mexcican </p>
-                <p className='mr-4'> $$$$ </p>
+                <div className='mb-9 ml-2'>
+                    <div className='font-normal flex text-reg text-black'>
+                        <Price price={restaurant.price} />
+                        <p className='mr-4'> {restaurant.cusine.name} </p>
+                        <p className='mr-4 capitalize'> {restaurant.location.name} </p>
+                    </div>
                 </div>
-            </div>
-            <Link href='/restaurant/baby' className='text-red-600 -mt-3'>
-                View More Info 
-            </Link>
+                <Link href = {`/restaurant/${restaurant.slug}`} className='text-red-600'>
+                    View More Info 
+                </Link>
             </div>
         </div>
     )

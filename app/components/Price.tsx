@@ -26,6 +26,6 @@ export default function Price({price}: {price: string}) {
 
     }
     return (
-        <p className='flex mb-2 font-light font-mono'>{renderPrice()}</p>
+        <p className='flex mb-2 font-light font-mono mr-2'>{renderPrice()}</p>
     )
 }
