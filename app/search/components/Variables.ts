@@ -8,3 +8,5 @@ export enum PRICES {
     regular = "regular",
     expensive = "expensive"
 }
+
+export const ratingStandard = 4.5

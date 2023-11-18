@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import RestaurantCard from './components/RestaurantCard'
-import { PrismaClient, Cusine, Location } from '@prisma/client'
+import { PrismaClient, Cusine, Review, Location } from "@prisma/client"
 const prisma = new PrismaClient()
 
 export interface RestaurantProps {
@@ -10,7 +10,8 @@ export interface RestaurantProps {
     cusine: Cusine,
     location: Location,
     price: string,
-    slug: string
+    slug: string,
+    Review: Review[]
 }
 const fetchRestaurants = async () => {
     try{
@@ -22,7 +23,8 @@ const fetchRestaurants = async () => {
             cusine: true,
             location: true,
             price: true,
-            slug: true
+            slug: true,
+            Review: true,
         }
     })
     if(!restaurants) throw Error
@@ -39,9 +41,9 @@ export default async function Home() {
         <main>
             <Header />
             <div className='flex flex-wrap justify-center items-center'>
-            {restaurants?.map((res: RestaurantProps): React.ReactNode => {
+            {restaurants?.map((restaurant: RestaurantProps): React.ReactNode => {
                 return (
-                    <RestaurantCard restaurant={res}/>
+                    <RestaurantCard restaurant={restaurant}/>
                 )
             })}
             </div>

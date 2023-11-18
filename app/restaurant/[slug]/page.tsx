@@ -1,7 +1,7 @@
 import { RestaurantProps } from "../../page"
 import {Rating, RestaurantNavBar, Reviews, Title, Description, Images, CustomerReveiws, MakeReservation, Header} from "./"
 import RestaurantLayout from "./RestaurantLayout"
-import {PrismaClient, Location, Cusine} from "@prisma/client"
+import {PrismaClient, Location, Cusine, Review} from "@prisma/client"
 const prisma = new PrismaClient()
 interface RestaurantDetails {
     id: number,
@@ -10,7 +10,8 @@ interface RestaurantDetails {
     description: string,
     slug: string,
     cusine: Cusine,
-    images: string[]
+    images: string[],
+    Review: Review[]
 }
 const fetchRestaurantDetails = async (slug: string) => {
     try{
@@ -25,7 +26,8 @@ const fetchRestaurantDetails = async (slug: string) => {
             description: true,
             cusine: true,
             images: true,
-            slug: true
+            slug: true,
+            Review: true
         }
     })
 
@@ -44,13 +46,13 @@ export default async function page({params}: {params: {slug: string}}) {
             <div className='bg-white w-[70%] rounded p-3 shadow'>
                 <RestaurantNavBar slug={params.slug} />
                 <Title Title= {restaurant?.name!} />
-                <div className='flex items-end text-sm text-gray-700'>
-                    <Rating />
-                    <Reviews />
+                <div className='flex items-center text-sm text-gray-700'>
+                    <Rating reviews = {restaurant?.Review!} />
+                    <Reviews reviews={restaurant?.Review!} />
                 </div>
                 <Description description={restaurant?.description!} />
                 <Images images={restaurant?.images!} />
-                <CustomerReveiws />
+                <CustomerReveiws reviews={restaurant?.Review!} />
             </div>
             <MakeReservation />
         </RestaurantLayout>

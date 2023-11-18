@@ -1,6 +1,6 @@
 import React from "react"
 import {Header, SideBar, RestaurantCard} from "./"
-import {PrismaClient, Cusine, Location, Price} from "@prisma/client"
+import {PrismaClient, Cusine, Location, Price, Review} from "@prisma/client"
 import Filters from "./components/Filters"
 import { RESTAURANT_QUERY_OPTIONS } from "./components/Variables"
 import PriceCatagory from "./components/PriceCatagory"
@@ -12,7 +12,8 @@ export interface searchedRestaurant {
     cusine: Cusine,
     description: string,
     slug: string,
-    location: Location
+    location: Location,
+    Review: Review[]
 }
 export interface QueryParms {
     searchParams: {
@@ -29,9 +30,10 @@ const fetchSearchedRestaurant = async ({searchParams}: QueryParms) => {
         main_image: true,
         price: true,
         cusine: true,
+        Review: true,
         description: true,
         slug: true,
-        location: true
+        location: true,
     }
     try{
         // If there is no query provided return 10 restuarants

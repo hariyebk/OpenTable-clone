@@ -18,7 +18,7 @@ export default function RestaurantCard({restaurant}: PropType) {
                         {/* REVIEW */}
                         <div className='flex items-start text-sm '>
                             <Price price={restaurant.price} />
-                            <p className='ml-2'> 77 Reviews </p>
+                            <p className='ml-2 font-bold'> {restaurant.Review.length === 0 ? "No reviews yet": `${restaurant.Review.length} reviews`} </p>
                         </div>
                         {/* PRICE */}
                         <div className='flex items-start font-normal capitalize text-sm pt-2'>

@@ -2,6 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import { searchedRestaurant } from '../page'
 import Price from '../../components/Price'
+import { calculateReviews } from '../../utils/calculateRatingAvarage'
+import { ratingStandard } from './Variables'
 export default function RestaurantCard({restaurant}: {restaurant: searchedRestaurant}) {
     return (
         <div className='border-b flex pb-5 space-x-3 ml-8 mb-5'>
@@ -9,8 +11,9 @@ export default function RestaurantCard({restaurant}: {restaurant: searchedRestau
             <div className='pl-5'>
                 <h2 className='text-2xl mt-2 font-bold'> {restaurant.name} </h2>
                 <div className='flex flex-col gap-2 items-start my-3'>
-                    <div className='flex text-black'>
-                        *****
+                    <div className='flex text-gray-700 text-center items-center'>
+                        <p> ***** </p>
+                        <p className='text-base font-bold ml-2'> {Number(calculateReviews(restaurant.Review)) >= ratingStandard && "POPULAR"} </p>
                     </div>
                     <p className='ml-2 text-sm text-justify'> {restaurant.description} </p>
                 </div>
