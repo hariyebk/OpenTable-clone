@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import { RestaurantProps } from "../../page"
 import {Rating, RestaurantNavBar, Reviews, Title, Description, Images, CustomerReveiws, MakeReservation, Header} from "./"
 import RestaurantLayout from "./RestaurantLayout"
@@ -31,7 +32,8 @@ const fetchRestaurantDetails = async (slug: string) => {
         }
     })
 
-    if(!restaurantDetails) throw Error
+    if(!restaurantDetails) notFound()
+
     return restaurantDetails
     }
     catch(error){
@@ -40,7 +42,8 @@ const fetchRestaurantDetails = async (slug: string) => {
 }
 export default async function page({params}: {params: {slug: string}}) {
     const restaurant = await fetchRestaurantDetails(params.slug)
-    
+    console.log(restaurant)
+
     return (
         <RestaurantLayout slug={restaurant?.slug!}>
             <div className='bg-white w-[70%] rounded p-3 shadow'>

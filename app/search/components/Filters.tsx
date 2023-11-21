@@ -7,7 +7,7 @@ export default function Filters({label, links, searchParams}: {label: string, li
     const queryKey = label === RESTAURANT_QUERY_OPTIONS.location ? RESTAURANT_QUERY_OPTIONS.location : RESTAURANT_QUERY_OPTIONS.cuisine
     return (
         <div className='border-b pb-4'>
-            <h1 className='mb-4 font-bold text-2xl pt-2'> {label} </h1>
+            <h1 className='mb-4 font-bold text-2xl pt-2 uppercase'> {label} </h1>
             <div className="flex flex-col space-y-2">
                 {links?.map(({name}: {name: string}):React.ReactNode => {
                     return (

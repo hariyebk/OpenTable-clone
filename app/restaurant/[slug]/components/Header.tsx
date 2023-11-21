@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Haeder({name}: {name: string}) {
     const fixTitle = () => {
-        const nameArray = name.split("-")
+        const nameArray = name?.split("-")
         nameArray[nameArray.length - 1] = `(${nameArray[nameArray.length - 1]})`
         return nameArray.join(" ").toUpperCase()
     }

@@ -43,7 +43,7 @@ export default async function Home() {
             <div className='flex flex-wrap justify-center items-center'>
             {restaurants?.map((restaurant: RestaurantProps): React.ReactNode => {
                 return (
-                    <RestaurantCard restaurant={restaurant}/>
+                    <RestaurantCard restaurant={restaurant} key={restaurant.id}/>
                 )
             })}
             </div>
