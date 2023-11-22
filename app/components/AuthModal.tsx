@@ -131,7 +131,7 @@ export default function AuthModal({isSignIn}: {isSignIn: boolean}) {
                             </div>
                             <div className='flex justify-end'>
                                 <button className='cta-button'> Create account </button>   
-                                <button className='close-button' onClick={handleClose}> Close </button>    
+                                <button className='close-button' onClick={handleClose}> Cancel </button>    
                             </div>
                     </div>
                     )
