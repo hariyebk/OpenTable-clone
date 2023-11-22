@@ -9,7 +9,7 @@ interface PropType {
 
 export default function RestaurantCard({restaurant}: PropType) {
     return (
-        <div className='mt-10 mx-10 '>
+        <div className='mt-10 mx-5 '>
             <Link href={`/restaurant/${restaurant.slug}`}>
                 <div className=' w-64 h-80 m-3 rounded overflow-hidden border cursor-pointer'>
                     <img src={restaurant.main_image} className='w-full h-40' />

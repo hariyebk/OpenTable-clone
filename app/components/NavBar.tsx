@@ -1,14 +1,14 @@
-'use client'
 import Link from 'next/link'
+import AuthModal from './AuthModal'
 
 export default function NavBar() {
     return (
         <nav className='bg-white p-2 flex justify-between mx-10 pt-8'>
-        <Link href='/' className='font-semibold text-black md:text-xl sm:text-sm'> OpenTable </Link>
+        <Link href='/' className='font-bold text-gray-800 md:text-2xl sm:text-sm'> OpenTable </Link>
         <div>
             <div className='flex gap-2 mr-5 mb-2 text-sm'>
-                <button className='bg-sky-700 text-white px-3 rounded  '> Sign up </button>
-                <button className='text-gray-500 p-2 rounded'> Sign in </button>
+                <AuthModal isSignIn = {true} />
+                <AuthModal isSignIn = {false} />
             </div>
         </div>
         </nav>

@@ -109,3 +109,21 @@ a {
     color-scheme: dark;
   }
 }
+
+@layer utilities {
+  .container {
+    @apply text-gray-700 flex flex-col flex-1 gap-3
+  }
+  .inner-container {
+    @apply flex items-center justify-center space-x-2 px-3
+  }
+  .input {
+    @apply bg-gray-300 w-40 h-8 focus:outline-none px-3 rounded text-black
+  }
+  .cta-button{
+    @apply m-auto mt-5 bg-blue-400 px-4 py-2 w-fit rounded focus:outline-none text-white text-lg
+  }
+  .close-button {
+    @apply m-auto mt-5 bg-gray-800 px-4 py-2 w-fit rounded focus:outline-none text-white text-lg
+  }
+}
