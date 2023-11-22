@@ -42,7 +42,6 @@ const fetchRestaurantDetails = async (slug: string) => {
 }
 export default async function page({params}: {params: {slug: string}}) {
     const restaurant = await fetchRestaurantDetails(params.slug)
-    console.log(restaurant)
 
     return (
         <RestaurantLayout slug={restaurant?.slug!}>

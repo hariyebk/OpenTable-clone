@@ -1,9 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { HTTPMETHODS } from "../../../app/utils/variables";
 import validator from 'validator'
-export default function handler(req: NextApiRequest, res: NextApiResponse){
+import bcrypt from "bcrypt"
+import {PrismaClient} from "@prisma/client"
+const prisma = new PrismaClient()
+interface NEWUSERTYPE {
+    firstname: string,
+    lastname: string,
+    city: string,
+    email: string,
+    password: string,
+    phonenumber: string
+}
+export default async function handler(req: NextApiRequest, res: NextApiResponse){
     if(req.method === HTTPMETHODS.post){
-        const {firstname, lastname, city, email, password, phonenumber} = req.body
+        const {firstname, lastname, city, email, password, phonenumber}: NEWUSERTYPE = req.body
         const errors: string[] = []
         const validateSchema = [
             {
@@ -40,6 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse){
                 errorMessage: "phone number is invalid"
             }
         ]
+        // check if inputs are valid
         validateSchema.forEach((check) => {
             if(!check.valid){
                 errors.push(check.errorMessage)
@@ -51,8 +63,39 @@ export default function handler(req: NextApiRequest, res: NextApiResponse){
                 errorMessage: errors[0]
             })
         }
+        // check if the user doesn't exist already
+        const userWithEmail = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+        if(userWithEmail){
+            res.status(400).json({
+                status: "error",
+                errorMessage: "Email is associated with another account. please Log in if you have an account"
+            })
+        }
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10)
+        // create new user
+        const newUser = await prisma.user.createMany({
+            data: {
+                first_name: firstname,
+                last_name: lastname,
+                email,
+                password: hashedPassword,
+                city,
+                phone: phonenumber
+            }})
+        if(!newUser){
+            res.status(400).json({
+                status: "error",
+                message: "something went wrong while creating A new user. please try again"
+            })
+        }
         res.status(200).json({
-            status: "success"
+            status: "success",
+            user: newUser
         })
     }
 }
