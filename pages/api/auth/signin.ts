@@ -64,11 +64,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             status: "success",
             token
         })
-        // cookies().set({
-        //     name: 'jwt',
-        //     value: token,
-        // });
-
     }
 
     res.status(404).send("unknown endpoint")
