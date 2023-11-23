@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { HTTPMETHODS } from "../../../app/utils/variables";
+import { ENCRYPTION_ALGORITHM, HTTPMETHODS } from "../../../app/utils/variables";
 import validator from 'validator'
 import bcrypt from "bcrypt"
+import * as jose from 'jose'
 import {PrismaClient} from "@prisma/client"
 const prisma = new PrismaClient()
 interface NEWUSERTYPE {
@@ -58,9 +59,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         })
         if(errors.length > 0){
-            res.status(400).json({
+            return res.status(400).json({
                 status: "error",
-                errorMessage: errors[0]
+                message: errors[0]
             })
         }
         // check if the user doesn't exist already
@@ -70,7 +71,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         })
         if(userWithEmail){
-            res.status(400).json({
+            return res.status(400).json({
                 status: "error",
                 errorMessage: "Email is associated with another account. please Log in if you have an account"
             })
@@ -78,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10)
         // create new user
-        const newUser = await prisma.user.createMany({
+        const newUser = await prisma.user.create({
             data: {
                 first_name: firstname,
                 last_name: lastname,
@@ -88,14 +89,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 phone: phonenumber
             }})
         if(!newUser){
-            res.status(400).json({
+            return res.status(400).json({
                 status: "error",
                 message: "something went wrong while creating A new user. please try again"
             })
         }
-        res.status(200).json({
+        return res.status(200).json({
             status: "success",
-            user: newUser
+            newUser
         })
     }
+    // If we recieve other HTTP methods than POST
+    res.status(404).send("unknown endpoint")
+
 }

@@ -3,3 +3,4 @@ export enum HTTPMETHODS {
     get = "GET",
     patch = "PATCH"
 }
+export const ENCRYPTION_ALGORITHM = "HS256"
