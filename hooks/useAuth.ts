@@ -1,8 +1,6 @@
 import axios from "axios"
-import { DEVELOPMENT_SERVER_AUTH_LOGOUT, DEVELOPMENT_SERVER_AUTH_SIGNIN, DEVELOPMENT_SERVER_AUTH_SIGNUP} from "../app/utils/variables"
+import { DEVELOPMENT_SERVER_AUTH_LOGOUT, DEVELOPMENT_SERVER_AUTH_ME, DEVELOPMENT_SERVER_AUTH_SIGNIN, DEVELOPMENT_SERVER_AUTH_SIGNUP} from "../app/utils/variables"
 import { USER, useAuthContext } from "../context/AuthContext"
-
-
 
 export default function useAuth(){
     const {data, error, setAuthState} = useAuthContext()

@@ -21,7 +21,7 @@ export default function Stars({reviews}: {reviews: Review[]}) {
         }
         return stars.map((star:StaticImageData, index: number): React.ReactNode => {
             return (
-                <Image src={star} width={14} height={14} alt="star" className="mr-1" key={index} />
+                <Image src={star} width={14} height={14} alt="star" className="mr-1 object-fill" key={index} />
             )
         })
     }    

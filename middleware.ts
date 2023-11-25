@@ -1,21 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import {getCookie} from "cookies-next"
 import * as jose from "jose"
 
 // A middleware responsible for checking if there is a jwt token within the request and it is verified
 export async function middleware(req: NextRequest, res: NextResponse) {
-    // check if the request object has an authorization header in it
-    const bearerToken = req.headers.get("authorization") as string
-    if(!bearerToken){
-        return new NextResponse(
-            JSON.stringify({errorMessage: "unauthorized request"}),
-            {status: 401}
-        )
-    }
-    // separating the Bearer from the token
-    const token = bearerToken.split(" ")[1]
+    const token = getCookie("jwt", {req, res, httpOnly: true, secure: true})
     if(!token){
         return new NextResponse(
-            JSON.stringify({errorMessage: "unauthorized request"}),
+            JSON.stringify({errorMessage: "unauthorized request (no token found)"}),
             {status: 401}
         )
     }
@@ -26,7 +18,7 @@ export async function middleware(req: NextRequest, res: NextResponse) {
     }
     catch(error){
         return new NextResponse(
-            JSON.stringify({errorMessage: "unauthorized request"}),
+            JSON.stringify({errorMessage: "unauthorized request (invalid token)"}),
             {status: 401}
         )
     }
